@@ -4,19 +4,13 @@ First open-source Geometry Dash cross-platform Modding SDK
 # Requirements
 - CMake 3.21
 - Android NDK r23
-- Visual Studio Build Tools (2019 maybe)
+- LLVM x86
 - Java and ApkTool
 
-# Building for Windows
+# Building
 - Open `CMakeLists.txt` and change `NDK_ROOT` to your NDK root folder path
-- Change `BUILD_TARGET` to `windows`
-- `cmake -S . -B build -G "Visual Studio 16 2019" -T host=x86 -A win32` // if anyone knows how to build for windows with clang please https://github.com/HJfod/cocos-headers/issues/10
-- `cmake --build build --config Release`
-
-# Building for Android
-- Open `CMakeLists.txt` and change `NDK_ROOT` to your NDK root folder path
-- Change `BUILD_TARGET` to `android`
-- `cmake -S . -B build -G "Ninja"`
+- Set `BUILD_TARGET` to `windows` or `android`
+- `cmake -S . -B build -G 'Ninja'`
 - `cmake --build build --config Release`
 
 # Loading .so on Android
@@ -38,4 +32,5 @@ invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V
 - [HJfod](https://github.com/HJfod) for [cocos-headers](https://github.com/HJfod/cocos-headers)
 - [pie](https://github.com/poweredbypie/) for [gd.h for windows](https://github.com/poweredbypie/gd.h)
 - [ItalianApkDownloader](https://github.com/ItalianApkDownloader) for [gd.h for android](https://github.com/ItalianApkDownloader/gdh)
+- [matcool](https://github.com/matcool) for help with building for windows
 - [MacLao](https://github.com/MacLaoCodding) for his cat Булка whose name is in the name :smirk_cat:

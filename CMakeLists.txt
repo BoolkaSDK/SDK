@@ -16,7 +16,7 @@ cmake_minimum_required(VERSION 3.21)
 
     set(OUT_PATH "${CMAKE_SOURCE_DIR}/out")
 
-    set(BUILD_TARGET "android") # windows / android (windows must be built with msvc)
+    set(BUILD_TARGET "windows") # windows / android (windows must be built with msvc)
     # cringe but how
 
 # ======== END ======== #
@@ -75,6 +75,8 @@ if (BUILD_TARGET STREQUAL "android")
 elseif (BUILD_TARGET STREQUAL "windows")
 
 # ======== WINDOWS ======== #
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32")
 
     set(TARGET_NAME "${MOD_NAME}-windows")
     project(${TARGET_NAME})
