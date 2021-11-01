@@ -56,6 +56,14 @@ if (BUILD_TARGET STREQUAL "android")
     project(${TARGET_NAME} VERSION ${VERSION})
 
     add_library(${TARGET_NAME} SHARED ${PROJECT_SRC})
+
+    target_compile_definitions(${TARGET_NAME} PRIVATE "ANDROID")
+
+    include_directories(
+        "${NDK_ROOT}/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include"
+        "${NDK_ROOT}/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/arm-linux-androideabi"
+        "${NDK_ROOT}/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/ac++/v1"
+    )
     
     include_directories(
         "libraries/android/dobby"

@@ -2,11 +2,17 @@
 #define __GD_H__
 
 #include <cocos2d.h>
-
+#include <dlfcn.h>
 #include "gdMacros.h"
 
-namespace gd {
+namespace gd
+{
+    inline auto base = dlopen("libcocos2dcpp.so", RTLD_LAZY);
 
+    inline bool init() {
+        // if the base address is valid, all other values should be valid.
+        return base;
+    }
 }
 
 namespace FMOD {

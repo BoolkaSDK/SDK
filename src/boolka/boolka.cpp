@@ -20,12 +20,12 @@ void Boolka::CreateFunctionHook(uintptr_t offset, const char* symbol, void* func
 #endif
 
 #ifdef ANDROID
-    DobbyHook(dlsym(dlopen("libcocos2dcpp.so", RTLD_LAZY), symbol), function, original);
+    DobbyHook(dlsym(gd::base, symbol), function, original);
 #endif
 }
 
 #ifdef WIN32
-void Boolka::Main(HMODULE hModule)
+void __stdcall Boolka::Main(HMODULE hModule)
 {
     DisableThreadLibraryCalls(hModule);
     MH_Initialize();
