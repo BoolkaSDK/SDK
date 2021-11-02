@@ -8,7 +8,7 @@ class Boolka
 {
 public:
 #ifdef WIN32
-    static void Main(HMODULE hModule);
+    static void __stdcall Main(HMODULE hModule);
 #endif
 
 #ifdef ANDROID

@@ -28,6 +28,12 @@ void Boolka::CreateFunctionHook(uintptr_t offset, const char* symbol, void* func
 void __stdcall Boolka::Main(HMODULE hModule)
 {
     DisableThreadLibraryCalls(hModule);
+
+#ifdef _DEBUG
+    AllocConsole();
+    freopen("CONOUT$", "w", stdout);
+#endif
+
     MH_Initialize();
 
     Hooks::init();
