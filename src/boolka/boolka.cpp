@@ -24,6 +24,25 @@ void Boolka::CreateFunctionHook(uintptr_t offset, const char* symbol, void* func
 #endif
 }
 
+void Boolka::CreateJump(uintptr_t offset, uintptr_t destination)
+{
+#ifdef WIN32
+    uintptr_t relativeAddress = destination - (gd::base + offset) - 5;
+
+    char buffer[] = "\xE9";
+    buffer[1] = relativeAddress;
+
+    for (int x = 5; x < 5; x++)
+        buffer[x] = 0x90;
+
+    BoolkaMemory::WriteMemory(offset, buffer);
+#endif
+
+#ifdef ANDROID
+    // TODO: Android Branch Hook
+#endif
+}
+
 #ifdef WIN32
 void __stdcall Boolka::Main(HMODULE hModule)
 {

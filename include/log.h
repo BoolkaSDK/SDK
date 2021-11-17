@@ -15,10 +15,10 @@
 
 #ifdef WIN32
 
-#define LOGE(...) printf("\n[ERROR] " "" __VA_ARGS__)
-#define LOGW(...) printf("\n[WARN] " "" __VA_ARGS__)
-#define LOGI(...) printf("\n[INFO] " "" __VA_ARGS__)
-#define LOGD(...) printf("\n[DEBUG] " "" __VA_ARGS__)
+#define LOGE(...) printf("[ERROR] " "" __VA_ARGS__); printf("\n")
+#define LOGW(...) printf("[WARN] " "" __VA_ARGS__); printf("\n")
+#define LOGI(...) printf("[INFO] " "" __VA_ARGS__); printf("\n")
+#define LOGD(...) printf("[DEBUG] " "" __VA_ARGS__); printf("\n")
 
 #endif
 

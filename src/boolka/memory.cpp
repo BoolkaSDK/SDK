@@ -4,6 +4,8 @@
 #include <memory.hpp>
 
 #ifdef ANDROID
+BoolkaMemory::base = BoolkaMemory::FindLibrary("libcocos2dcpp.so");
+
 // From KittyMemory: https://github.com/MJx0/KittyMemory
 bool BoolkaMemory::Protect(uintptr_t addr, size_t length, int protection)
 {
@@ -14,36 +16,10 @@ bool BoolkaMemory::Protect(uintptr_t addr, size_t length, int protection)
 }
 #endif
 
-bool BoolkaMemory::WriteMemory(uintptr_t addr, u_char data)
+bool BoolkaMemory::WriteMemory(uintptr_t offset, const char* buffer)
 {
 #ifdef ANDROID
-    addr = FindLibrary("libcocos2dcpp.so") + addr;
-
-    if (!Protect(addr, sizeof(data), _PROT_RWX_))
-        return false;
-
-    if (memcpy((void*)addr, &data, sizeof(data)) != NULL && Protect(addr, sizeof(data), _PROT_RX_))
-        return true;
-
-    return false;
-#endif
-
-#ifdef WIN32
-    addr = gd::base + addr;
-
-    DWORD oldProtect, newProtect;
-    VirtualProtect((void*)addr, sizeof(data), PAGE_EXECUTE_READWRITE, &oldProtect);
-    *(DWORD*)addr = data;
-    VirtualProtect((void*)addr, sizeof(data), oldProtect, &newProtect);
-
-    return true;
-#endif
-}
-
-bool BoolkaMemory::WriteMemory(uintptr_t addr, const char* buffer)
-{
-#ifdef ANDROID
-    addr = FindLibrary("libcocos2dcpp.so") + addr;
+    uintptr_t addr = base + offset;
 
     if (!Protect(addr, strlen(buffer), _PROT_RWX_))
         return false;
@@ -55,7 +31,7 @@ bool BoolkaMemory::WriteMemory(uintptr_t addr, const char* buffer)
 #endif
 
 #ifdef WIN32
-    addr = gd::base + addr;
+    uintptr_t addr = gd::base + offset;
 
     DWORD oldProtect, newProtect;
     VirtualProtect((void*)addr, 1, PAGE_EXECUTE_READWRITE, &oldProtect);

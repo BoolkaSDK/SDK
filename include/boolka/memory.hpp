@@ -23,13 +23,14 @@ class BoolkaMemory
 {
 private:
 #ifdef ANDROID
+    static uintptr_t base;
+
     static bool Protect(uintptr_t addr, size_t length, int protection);
     static uintptr_t FindLibrary(const char* library);
 #endif
 
 public:
-    static bool WriteMemory(uintptr_t addr, u_char data);
-    static bool WriteMemory(uintptr_t addr, const char* buffer);
+    static bool WriteMemory(uintptr_t offset, const char* buffer);
 };
 
 #endif  // __MEMORY_H__
